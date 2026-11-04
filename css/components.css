@@ -1,0 +1,447 @@
+/* Componentes compartidos por todas las páginas. */
+
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 20;
+  padding: var(--space-2) var(--space-3);
+  background: var(--ink);
+  color: var(--paper-light);
+  clip-path: inset(50%);
+}
+
+.skip-link:focus {
+  clip-path: none;
+  color: var(--paper-light);
+}
+
+/* Cabecera y navegación */
+.site-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-5);
+  padding: var(--space-3) max(var(--space-4), calc((100% - var(--page-width)) / 2));
+  border-bottom: 2px solid var(--moss-dark);
+  background: var(--moss-dark);
+  color: var(--paper-light);
+}
+
+.brand {
+  color: inherit;
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.brand:hover {
+  color: var(--leaf-light);
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+  margin: 0;
+}
+
+.site-nav a {
+  display: block;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-s);
+  color: var(--paper-light);
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  background: var(--moss);
+  color: var(--paper-light);
+}
+
+.site-nav a[aria-current="page"] {
+  background: var(--paper);
+  color: var(--moss-dark);
+  font-weight: 600;
+}
+
+.site-header :focus-visible {
+  outline-color: var(--paper-light);
+}
+
+/* Estructura de página */
+.page {
+  flex: 1;
+  width: 100%;
+  max-width: calc(var(--page-width) + 2 * var(--space-4));
+  margin-inline: auto;
+  padding: var(--space-7) var(--space-4);
+}
+
+.page-narrow {
+  max-width: calc(var(--page-narrow) + 2 * var(--space-4));
+}
+
+.page > section + section {
+  margin-top: var(--space-7);
+}
+
+.page-narrow > section + section {
+  margin-top: var(--space-6);
+}
+
+.hero {
+  max-width: 46rem;
+}
+
+.eyebrow {
+  margin-bottom: var(--space-2);
+  color: var(--moss);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lede {
+  font-size: 1.15rem;
+}
+
+.hint {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+/* Pie */
+.site-footer {
+  padding: var(--space-5) max(var(--space-4), calc((100% - var(--page-width)) / 2));
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.875rem;
+}
+
+.site-footer a {
+  color: var(--leaf-light);
+}
+
+.site-footer a:hover {
+  color: var(--paper-light);
+}
+
+.site-footer :focus-visible {
+  outline-color: var(--paper-light);
+}
+
+/* Botones */
+.button {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-m);
+  background: var(--paper-light);
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: box-shadow 120ms ease, background-color 120ms ease;
+}
+
+.button:hover {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.button:disabled {
+  border-color: var(--line);
+  color: var(--ink-soft);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.button-primary {
+  padding: var(--space-3) var(--space-5);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 1.05rem;
+}
+
+.button-primary:hover {
+  background: var(--accent-dark);
+  color: var(--on-accent);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* Fichas del cuaderno */
+.note {
+  position: relative;
+  padding: var(--space-4) var(--space-4) var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--paper-light);
+  box-shadow: var(--shadow-note);
+  transition: box-shadow 120ms ease;
+}
+
+/* Cinta adhesiva */
+.note::before {
+  content: "";
+  position: absolute;
+  top: -0.55rem;
+  left: 50%;
+  width: 3.5rem;
+  height: 1.1rem;
+  margin-left: -1.75rem;
+  background: var(--tape);
+}
+
+.note-muted {
+  border-style: dashed;
+  background: var(--paper);
+  box-shadow: none;
+  color: var(--ink-soft);
+}
+
+.note-muted::before {
+  content: none;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+/* Pasos numerados */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: var(--space-5);
+  margin-top: var(--space-4);
+  counter-reset: paso;
+}
+
+.steps li {
+  counter-increment: paso;
+  padding-top: var(--space-3);
+  border-top: 2px solid var(--moss);
+}
+
+.steps h3::before {
+  content: counter(paso) ". ";
+  color: var(--accent);
+}
+
+/* Pokédex */
+.species {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--space-3);
+  align-items: center;
+}
+
+.species h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.specimen {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 2px dashed var(--line);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--moss);
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.dex-number {
+  margin: 0;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.types {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.type {
+  padding: 0.05rem var(--space-3);
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.type-normal { background: var(--type-normal); }
+.type-fuego { background: var(--type-fuego); }
+.type-agua { background: var(--type-agua); }
+.type-planta { background: var(--type-planta); }
+.type-electrico { background: var(--type-electrico); }
+.type-hielo { background: var(--type-hielo); }
+.type-lucha { background: var(--type-lucha); }
+.type-veneno { background: var(--type-veneno); }
+.type-tierra { background: var(--type-tierra); }
+.type-volador { background: var(--type-volador); }
+.type-psiquico { background: var(--type-psiquico); }
+.type-bicho { background: var(--type-bicho); }
+.type-roca { background: var(--type-roca); }
+.type-fantasma { background: var(--type-fantasma); }
+.type-dragon { background: var(--type-dragon); }
+.type-siniestro { background: var(--type-siniestro); }
+.type-acero { background: var(--type-acero); }
+.type-hada { background: var(--type-hada); }
+
+/* Tablas anchas */
+.table-scroll {
+  overflow-x: auto;
+  margin-bottom: var(--space-4);
+}
+
+/* Paneles flotantes: selector y editor */
+.panel {
+  width: min(32rem, calc(100vw - 2 * var(--space-4)));
+  max-height: calc(100dvh - 2 * var(--space-4));
+  padding: var(--space-5);
+  overflow-y: auto;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-m);
+  background: var(--paper-light);
+  color: var(--ink);
+  box-shadow: var(--shadow-panel);
+}
+
+.panel:focus {
+  outline: none; /* foco programático del panel; sus controles sí muestran foco */
+}
+
+.panel::backdrop {
+  background: #2a2f2366;
+}
+
+.panel-wide {
+  width: min(46rem, calc(100vw - 2 * var(--space-4)));
+}
+
+.panel-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.panel-header h2 {
+  margin: 0;
+}
+
+.picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+  gap: var(--space-2);
+}
+
+.picker button {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--paper);
+  color: var(--ink-soft);
+  text-align: left;
+  cursor: not-allowed;
+}
+
+/* Maqueta del editor: el navegador lo abre con #editor en la URL */
+#editor:target {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  margin: auto;
+  height: fit-content;
+}
+
+.editor-fields {
+  min-width: 0;
+  margin: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+}
+
+.editor-fields legend {
+  padding-inline: var(--space-2);
+  font-family: var(--font-title);
+  font-weight: 700;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.field-row label,
+.field-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.field-block {
+  margin-bottom: var(--space-4);
+}
+
+.editor-fields input,
+.editor-fields select,
+.editor-fields textarea {
+  width: 100%;
+  min-width: 0;
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.stats th,
+.stats td {
+  padding-block: var(--space-1);
+}
+
+.stats input {
+  min-width: 3.5rem;
+}
+
+.stats output {
+  font-family: var(--font-mono);
+  font-weight: 700;
+}

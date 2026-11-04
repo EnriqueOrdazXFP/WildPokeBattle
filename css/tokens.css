@@ -1,0 +1,72 @@
+/* Tokens de diseño. Solo valores visuales: nada de física aquí. */
+:root {
+  /* Papel y tinta */
+  --paper: #f5eeda;
+  --paper-light: #fcf8ec;
+  --paper-rule: #e6dcc0;
+  --ink: #2a2f23;
+  --ink-soft: #545c49;
+  --line: #8b8468;
+
+  /* Naturaleza */
+  --moss: #3b6531;
+  --moss-dark: #284a22;
+  --leaf: #7ba653;
+  --leaf-light: #a9c97c;
+  --soil: #6b4f32;
+  --stone: #cfc9b6;
+  --sky-top: #bfe0e8;
+  --sky-bottom: #eef6e6;
+  --tape: #e6cf8fcc;
+
+  /* Acento */
+  --accent: #a8402a;
+  --accent-dark: #86301e;
+  --on-accent: #fffaf0;
+
+  /* Tipos: fondos claros para usar siempre con --ink */
+  --type-normal: #dcd8c6;
+  --type-fuego: #f6bd92;
+  --type-agua: #a9cdf0;
+  --type-planta: #b5dc98;
+  --type-electrico: #f6e08a;
+  --type-hielo: #bfe9e6;
+  --type-lucha: #e7a99d;
+  --type-veneno: #d4b0dd;
+  --type-tierra: #e2c994;
+  --type-volador: #c9c8f2;
+  --type-psiquico: #f5b3c8;
+  --type-bicho: #d0dc8e;
+  --type-roca: #d4c594;
+  --type-fantasma: #bdb2dc;
+  --type-dragon: #b5a8f0;
+  --type-siniestro: #c2b5aa;
+  --type-acero: #c9d2dc;
+  --type-hada: #f6c5dd;
+
+  /* Tipografía de sistema: funciona sin conexión */
+  --font-title: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", Consolas, Menlo, monospace;
+
+  /* Espaciado */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  /* Formas */
+  --radius-s: 3px;
+  --radius-m: 6px;
+  --shadow-note: 3px 3px 0 #2a2f2333;
+  --shadow-note-hover: 5px 5px 0 #2a2f2344;
+  --shadow-panel: 0 12px 40px #2a2f2366;
+
+  /* Medidas */
+  --page-width: 68rem;
+  --page-narrow: 44rem;
+}

@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>El Prado · WildPokeBattle</title>
+  <meta name="description" content="El primer escenario de WildPokeBattle: un prado cuyas fichas son las plataformas de los Pokémon.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/scenes/prado.css">
+</head>
+<body class="scene-prado">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header" data-wpb-body="solid">
+    <a class="brand" href="../index.html">WildPokeBattle</a>
+    <nav aria-label="Principal">
+      <ul class="site-nav">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="prado.html" aria-current="page">Prado</a></li>
+        <li><a href="pokedex.html">Pokédex</a></li>
+        <li><a href="ayuda.html">Ayuda</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="contenido" class="arena">
+    <div class="scene-decor" aria-hidden="true">
+      <span class="cloud cloud-a"></span>
+      <span class="cloud cloud-b"></span>
+      <span class="hills"></span>
+    </div>
+
+    <section id="escenario" class="arena-intro" aria-labelledby="titulo-prado">
+      <p class="eyebrow">Escenario 1</p>
+      <h1 id="titulo-prado">El Prado</h1>
+      <p class="lede">Elige un Pokémon y suéltalo aquí. Con dos, empieza el combate.</p>
+      <p><button class="button button-primary" type="button" popovertarget="selector">Seleccionar Pokémon</button></p>
+      <p class="hint">Pausa y editor: <kbd>Alt</kbd> + <kbd>P</kbd></p>
+    </section>
+
+    <article class="note surface surface-rutas" data-wpb-body="platform" aria-labelledby="titulo-rutas">
+      <h2 id="titulo-rutas">Rutas</h2>
+      <p>Un sendero cruza el prado de oeste a este y termina en el muro de piedra.</p>
+    </article>
+
+    <article class="note surface surface-flora" data-wpb-body="platform" aria-labelledby="titulo-flora">
+      <h2 id="titulo-flora">Flora</h2>
+      <p>Hierba alta, tréboles y flores que se cierran al anochecer.</p>
+    </article>
+
+    <article class="note surface surface-fauna" data-wpb-body="platform" aria-labelledby="titulo-fauna">
+      <h2 id="titulo-fauna">Fauna</h2>
+      <p>Terreno abierto: premia a quien corre y a quien salta.</p>
+    </article>
+
+    <article class="note note-muted surface surface-obras" data-wpb-body="platform" data-wpb-enabled="false" aria-labelledby="titulo-obras">
+      <h2 id="titulo-obras">Cartel caído</h2>
+      <p>Se ve, pero no se puede pisar: esta ficha no tiene caja física.</p>
+    </article>
+
+    <article class="note surface surface-clima" data-wpb-body="platform" aria-labelledby="titulo-clima">
+      <h2 id="titulo-clima">Clima</h2>
+      <p>Soleado, con brisa suave.</p>
+    </article>
+
+    <article class="note surface surface-sendero" data-wpb-body="platform" aria-labelledby="titulo-sendero">
+      <h2 id="titulo-sendero">Sendero</h2>
+      <p>El primer escalón del prado.</p>
+    </article>
+
+    <aside class="note surface-wall" data-wpb-body="wall" aria-labelledby="titulo-muro">
+      <h2 id="titulo-muro">Muro de piedra</h2>
+      <dl class="facts">
+        <div>
+          <dt>Terreno</dt>
+          <dd>Hierba</dd>
+        </div>
+        <div>
+          <dt>Altitud</dt>
+          <dd>Baja</dd>
+        </div>
+        <div>
+          <dt>Activos</dt>
+          <dd>Máximo 2</dd>
+        </div>
+      </dl>
+    </aside>
+
+    <div class="ground" data-wpb-body="solid"></div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Proyecto de fans, gratuito y sin ánimo de lucro. No está afiliado a Nintendo, Game Freak, Creatures Inc. ni The Pokémon Company. <a href="ayuda.html#aviso-legal">Aviso legal</a></p>
+  </footer>
+
+  <div id="wpb-layer" aria-hidden="true"></div>
+
+  <dialog id="selector" class="panel" popover aria-labelledby="titulo-selector">
+    <header class="panel-header">
+      <h2 id="titulo-selector">Seleccionar Pokémon</h2>
+      <button class="button" type="button" popovertarget="selector" popovertargetaction="hide">Cerrar</button>
+    </header>
+    <p class="hint">La selección se activará más adelante. Mientras tanto puedes consultar la <a href="pokedex.html">Pokédex</a>.</p>
+    <ul class="picker">
+      <li><button type="button" disabled>Venusaur</button></li>
+      <li><button type="button" disabled>Charizard</button></li>
+      <li><button type="button" disabled>Blastoise</button></li>
+      <li><button type="button" disabled>Pikachu</button></li>
+      <li><button type="button" disabled>Gengar</button></li>
+      <li><button type="button" disabled>Snorlax</button></li>
+      <li><button type="button" disabled>Dragonite</button></li>
+      <li><button type="button" disabled>Scizor</button></li>
+      <li><button type="button" disabled>Tyranitar</button></li>
+      <li><button type="button" disabled>Gardevoir</button></li>
+      <li><button type="button" disabled>Garchomp</button></li>
+      <li><button type="button" disabled>Lucario</button></li>
+    </ul>
+  </dialog>
+
+  <dialog id="editor" class="panel panel-wide" aria-labelledby="titulo-editor">
+    <header class="panel-header">
+      <h2 id="titulo-editor">Editor de Pokémon</h2>
+      <a class="button" href="#escenario">Cerrar maqueta</a>
+    </header>
+    <p class="hint">Maqueta sin funcionalidad, con Pikachu como ejemplo. El editor real se abrirá con <kbd>Alt</kbd> + <kbd>P</kbd>.</p>
+    <form>
+      <fieldset class="editor-fields" disabled>
+        <legend>Pikachu</legend>
+
+        <div class="field-row">
+          <label>Nivel <input type="number" name="nivel" min="1" max="100" value="50"></label>
+          <label>Naturaleza
+            <select name="naturaleza">
+              <option>Fuerte</option>
+              <option>Alegre</option>
+              <option>Modesta</option>
+            </select>
+          </label>
+          <label>Habilidad
+            <select name="habilidad">
+              <option>Pararrayos</option>
+              <option>Elec. Estática</option>
+            </select>
+          </label>
+          <label>Semilla <input type="text" name="semilla" value="20261104"></label>
+        </div>
+
+        <div class="table-scroll">
+          <table class="stats">
+            <caption>Estadísticas</caption>
+            <thead>
+              <tr>
+                <th scope="col">Estadística</th>
+                <th scope="col">IV</th>
+                <th scope="col">EV</th>
+                <th scope="col">Final</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">PS</th>
+                <td><input type="number" name="iv-ps" aria-label="IV de PS" min="0" max="31" value="31"></td>
+                <td><input type="number" name="ev-ps" aria-label="EV de PS" min="0" max="252" value="0"></td>
+                <td><output>110</output></td>
+              </tr>
+              <tr>
+                <th scope="row">Ataque</th>
+                <td><input type="number" name="iv-atk" aria-label="IV de Ataque" min="0" max="31" value="31"></td>
+                <td><input type="number" name="ev-atk" aria-label="EV de Ataque" min="0" max="252" value="0"></td>
+                <td><output>75</output></td>
+              </tr>
+              <tr>
+                <th scope="row">Defensa</th>
+                <td><input type="number" name="iv-def" aria-label="IV de Defensa" min="0" max="31" value="31"></td>
+                <td><input type="number" name="ev-def" aria-label="EV de Defensa" min="0" max="252" value="0"></td>
+                <td><output>60</output></td>
+              </tr>
+              <tr>
+                <th scope="row">Ataque Esp.</th>
+                <td><input type="number" name="iv-spa" aria-label="IV de Ataque Especial" min="0" max="31" value="31"></td>
+                <td><input type="number" name="ev-spa" aria-label="EV de Ataque Especial" min="0" max="252" value="0"></td>
+                <td><output>70</output></td>
+              </tr>
+              <tr>
+                <th scope="row">Defensa Esp.</th>
+                <td><input type="number" name="iv-spd" aria-label="IV de Defensa Especial" min="0" max="31" value="31"></td>
+                <td><input type="number" name="ev-spd" aria-label="EV de Defensa Especial" min="0" max="252" value="0"></td>
+                <td><output>70</output></td>
+              </tr>
+              <tr>
+                <th scope="row">Velocidad</th>
+                <td><input type="number" name="iv-spe" aria-label="IV de Velocidad" min="0" max="31" value="31"></td>
+                <td><input type="number" name="ev-spe" aria-label="EV de Velocidad" min="0" max="252" value="0"></td>
+                <td><output>110</output></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-row">
+          <label>Movimiento 1
+            <select name="movimiento-1"><option>Placaje Eléc.</option></select>
+          </label>
+          <label>Movimiento 2
+            <select name="movimiento-2"><option>Surf</option></select>
+          </label>
+          <label>Movimiento 3
+            <select name="movimiento-3"><option>Carantoña</option></select>
+          </label>
+          <label>Movimiento 4
+            <select name="movimiento-4"><option>Desarme</option></select>
+          </label>
+        </div>
+
+        <label class="field-block">Set en formato Showdown
+          <textarea name="set" rows="3">Pikachu
+Ability: Lightning Rod
+Level: 50</textarea>
+        </label>
+
+        <div class="button-row">
+          <button class="button" type="button">Regenerar</button>
+          <button class="button" type="button">Importar</button>
+          <button class="button" type="button">Exportar</button>
+          <button class="button" type="button">Retirar</button>
+        </div>
+      </fieldset>
+    </form>
+  </dialog>
+</body>
+</html>
