@@ -10,7 +10,7 @@ Resumen para clase: qué hay hecho, cómo funciona y por qué se hizo así. El d
 
 WildPokeBattle es una mascota virtual al estilo eSheep con Pokémon. La idea central es que **la propia web es el mundo físico**: las fichas de contenido son plataformas y los Pokémon caminan, saltan y combaten sobre ellas, solos y en tiempo real.
 
-Por ahora existe el escenario: una web navegable, sin JavaScript. Todavía no hay Pokémon en movimiento, pero la página ya indica qué elementos serán suelo, plataforma o pared.
+Por ahora existe el escenario: una web navegable con controles JavaScript locales para cambiar la hora y el clima. Todavía no hay Pokémon en movimiento, y el marcado de suelo, plataformas y pared aún no se conecta a un motor físico.
 
 ---
 
@@ -18,14 +18,14 @@ Por ahora existe el escenario: una web navegable, sin JavaScript. Todavía no ha
 
 1. **Investigación:** juegos parecidos, APIs de Pokémon y licencias de sprites. El resultado es el informe de `docs/`.
 2. **Diseño del proyecto:** el README fija las decisiones, la arquitectura y las fases.
-3. **Fase 1, HTML:** cuatro páginas semánticas, validadas antes de añadir estilos.
+3. **Fase 1, HTML:** páginas semánticas, validadas antes de añadir estilos.
 4. **Fase 2, CSS:** estilo de cuaderno de campo, adaptable de 360 px a escritorio.
 5. **Comprobación:** validador del W3C, enlaces, contraste y pruebas en Edge (sección 8).
 
 | Página | Para qué sirve |
 |---|---|
-| [index.html](../index.html) | Portada: qué es, cómo funciona y lista de escenarios |
-| [pages/prado.html](../pages/prado.html) | El escenario, el selector y la maqueta del editor |
+| [index.html](../index.html) | Prado, página principal, escenario y cuaderno de campo; incluye el selector y la maqueta del editor |
+| [pages/prado.html](../pages/prado.html) | Ruta antigua que redirige a la página principal |
 | [pages/pokedex.html](../pages/pokedex.html) | Las 12 especies propuestas, con una inicial en lugar de imagen |
 | [pages/ayuda.html](../pages/ayuda.html) | Atajos, uso en móvil, créditos y aviso legal |
 
@@ -35,7 +35,7 @@ Por ahora existe el escenario: una web navegable, sin JavaScript. Todavía no ha
 
 ```text
 WildPokeBattle/
-├── index.html                  portada (en la raíz para que sea la página de entrada)
+├── index.html                  página principal: Prado y cuaderno de campo
 ├── README.md                   documento principal: decisiones, arquitectura y fases
 ├── pages/                      el resto de páginas
 │   ├── prado.html
@@ -47,6 +47,8 @@ WildPokeBattle/
 │   ├── components.css          piezas reutilizables: botones, fichas, paneles, tablas
 │   └── scenes/
 │       └── prado.css           solo el prado: fondo, rejilla y posición de las fichas
+├── js/
+│   └── scene-controls.js       reloj del escenario y selector de clima
 ├── assets/
 │   └── ASSETS.md               origen y licencia de cada recurso
 └── docs/
@@ -54,16 +56,16 @@ WildPokeBattle/
     └── CHULETA.md              este documento
 ```
 
-- **`pages/`** separa la portada del resto. Por eso sus enlaces a CSS empiezan por `../`.
+- **`pages/`** contiene la Pokédex y la ayuda. `pages/prado.html` se conserva como redirección; el escenario y la página principal están unidos en la raíz.
 - **`css/`** se carga siempre en el mismo orden, de lo general a lo particular: `tokens` → `base` → `components` → `scenes`. A igual especificidad gana la última regla, así que cada escenario puede sobrescribir lo común.
 - **`css/scenes/`** tendrá un archivo por escenario. Añadir el bosque no obligará a tocar los estilos compartidos.
-- **`assets/`** de momento solo tiene el registro, porque todo el arte es CSS y SVG escrito dentro de `prado.css`.
+- **`js/scene-controls.js`** solo controla la interfaz ambiental; no es el motor ni el adaptador de física.
+- **`assets/`** de momento solo tiene el registro, porque las ilustraciones son CSS y SVG incluidos en el código.
 
 **Carpetas previstas, aún sin crear**
 
 | Carpeta | Fase | Contenido |
 |---|---|---|
-| `js/` | 3 en adelante | Motor, física, combate, IA, datos e interfaz |
 | `tests/` | 3 | Pruebas del motor con `node --test` |
 | `scripts/` | 4 | Generar los datos y descargar los sprites |
 | `assets/sprites/` | 4 | Sprites descargados en local, fuera de Git |
@@ -117,7 +119,8 @@ El HTML declara qué es cada elemento con atributos `data-`. No hay lógica: es 
 | Rejilla de 12 columnas y 7 filas | `.arena` | Colocar cada ficha a una altura exacta. Las filas miden al menos `5rem` |
 | Una columna por debajo de `62rem` | `@media` de `prado.css` | En móvil las fichas se alternan a izquierda y derecha, como escalones |
 | `minmax(0, 1fr)` | Columnas de `.arena` | Evita que un texto largo ensanche la columna y provoque scroll horizontal |
-| `isolation: isolate` | `.arena` | Mantiene el decorado con `z-index: -1` dentro del escenario, sin que se esconda detrás de su fondo |
+| Fondo fijo e independiente del suelo | `.scene-decor` y `.ground` | El cielo y las colinas permanecen visibles mientras se desplaza la página; el suelo sigue al final del escenario |
+| `isolation: isolate` | `.scene-prado` y `.arena` | Mantiene el decorado y los efectos del clima en sus capas sin ocultarlos detrás del fondo |
 | Suelo con `position: absolute` | `.ground` | Ocupa todo el ancho sin los márgenes de la rejilla |
 | `padding-bottom` igual a `--ground-height` | `.arena` | Hace que fichas y muro apoyen justo sobre el suelo |
 | `max()` en el `padding` | `.arena` | Centra el contenido y deja que el cielo llegue a los bordes |
@@ -167,18 +170,20 @@ Las superficies físicas **no pueden usar** `transform`, `translate`, `scale`, `
 
 ## 8. Comprobaciones
 
+Los resultados de la tabla corresponden a la revisión anterior a unir el Prado con la portada. En esta reorganización se comprobó que las rutas locales existen, que no hay solapamientos entre las fichas del escenario en escritorio y que no aparece scroll horizontal en escritorio ni en móvil.
+
 | Comprobación | Resultado |
 |---|---|
-| Validador W3C, 4 páginas | 0 errores y 0 avisos |
-| Enlaces locales de las páginas | 46, ninguno roto |
-| Scroll horizontal a 360, 768, 1024 y 1280 px | No hay |
-| Solapes entre superficies a 360, 1024 y 1280 px | No hay |
+| Validador W3C, 4 páginas | 0 errores y 0 avisos (revisión anterior) |
+| Enlaces locales de las páginas | 46, ninguno roto (revisión anterior) |
+| Scroll horizontal a 360, 768, 1024 y 1280 px | No hay (revisión anterior) |
+| Solapes entre superficies a 360, 1024 y 1280 px | No hay (revisión anterior) |
 | Propiedades prohibidas en superficies | Ninguna |
 | Contraste de texto | 18 pares, todos por encima de 4,5:1. Etiquetas de tipo: mínimo 6,42:1 |
 | Selector en Edge | Abre con clic y cierra con `Esc` |
 | Editor en Edge | Oculto por defecto, visible con `#editor`, cabe a 360 px |
 
-Estas pruebas se hicieron con scripts temporales que no están en el repositorio. El W3C se puede repetir en [validator.w3.org](https://validator.w3.org/), y el ancho con las herramientas de desarrollo del navegador.
+Las pruebas anteriores se hicieron con scripts temporales que no están en el repositorio. El W3C se puede repetir en [validator.w3.org](https://validator.w3.org/), y el ancho con las herramientas de desarrollo del navegador.
 
 ### Limitaciones que conviene decir tú antes de que te pregunten
 
@@ -194,7 +199,7 @@ Estas pruebas se hicieron con scripts temporales que no están en el repositorio
 ## 9. Cómo enseñarla en clase
 
 1. Abre la carpeta con **Live Server** o ejecuta `npx serve`. Así se probó, y desde la Fase 3 será obligatorio, porque los módulos de JavaScript no funcionan abriendo el archivo directamente.
-2. Entra en el prado y explica que las fichas serán plataformas.
+2. Abre la página principal, el Prado, y explica que las fichas serán plataformas.
 3. Pulsa «Seleccionar Pokémon» y ciérralo con `Esc`: todo eso funciona sin JS.
 4. Añade `#editor` al final de la URL para mostrar la maqueta del editor.
 5. Reduce el ancho de la ventana para ver cómo las fichas pasan a una columna.

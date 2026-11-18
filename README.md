@@ -1,12 +1,22 @@
 # WildPokeBattle (Battle Palace)
 
+## Iniciar la web en localhost
+
+Abre la carpeta del proyecto en VS Code y, desde **Terminal > Nuevo terminal**, ejecuta en la raíz del proyecto:
+
+```powershell
+py -m http.server 8000
+```
+
+Después abre [http://localhost:8000](http://localhost:8000) en el navegador. Si `py` no está disponible, prueba `python -m http.server 8000`. Para detener el servidor, vuelve al terminal y pulsa `Ctrl+C`.
+
 > **Simulación de combates Pokémon autónomos en tiempo real, donde la propia página web forma parte del escenario.**
 
 WildPokeBattle, también denominado **Battle Palace**, es un proyecto de fans que imagina Pokémon capaces de moverse e interactuar con una web como un entorno físico: con perspectiva lateral, gravedad, saltos, plataformas, obstáculos y elementos interactivos. Los combates serán automáticos: quien juega prepara y optimiza sus equipos, pero no dirige las acciones durante la batalla.
 
 La web será tanto la experiencia jugable como una wiki de referencia sobre Pokémon, movimientos, equipos y el proyecto. A largo plazo se contempla una aplicación de escritorio en la que los Pokémon puedan interactuar con ventanas y aplicaciones; primero debe completarse la experiencia web.
 
-> **Estado importante:** el repositorio contiene actualmente una primera versión visual en HTML y CSS. No contiene todavía simulación física, Pokémon animados, IA ni combates funcionales. Las ideas de juego y arquitectura que siguen se distinguen expresamente de lo ya implementado.
+> **Estado importante:** el repositorio contiene una base visual en HTML y CSS, más controles JavaScript locales para la hora y el clima del Prado. No contiene todavía simulación física, Pokémon animados, IA ni combates funcionales. Las ideas de juego y arquitectura que siguen se distinguen expresamente de lo ya implementado.
 
 ## Características y visión
 
@@ -47,7 +57,7 @@ Estos modos forman parte del diseño; ninguno está implementado todavía.
 
 Las páginas serán escenarios con distribuciones y ambientes propios. El campo de batalla se adaptará al espacio disponible en el navegador; una ventana más pequeña dará lugar a un campo menor. El sistema deberá identificar los elementos de la interfaz que participan en la simulación.
 
-En la implementación actual, el Prado ya contiene marcado HTML que identifica algunos elementos con `data-wpb-body` y una capa de renderizado reservada, pero no hay código que los convierta en cuerpos físicos ni Pokémon que los usen. La capa y el marcado son estructura preparatoria, no un motor físico.
+En la implementación actual, el Prado es la página principal e incluye el cuaderno de campo, el selector y marcado HTML que identifica algunos elementos con `data-wpb-body`. El reloj permite cambiar la hora con AM/PM y muestra transiciones visuales de amanecer, día, atardecer y noche; el selector de clima aplica filtros y animaciones visuales. Estos controles afectan a la presentación del escenario, no a reglas de combate o simulación. También existe una capa de renderizado reservada, pero no hay código que convierta los elementos marcados en cuerpos físicos ni Pokémon que los usen. La capa y el marcado son estructura preparatoria, no un motor físico.
 
 ## Arquitectura prevista
 
@@ -65,7 +75,7 @@ No se han confirmado motores, frameworks, bases de datos, protocolos de red ni t
 
 ## Estado actual del desarrollo
 
-**Implementado:** estructura semántica y navegable de la web, estilos responsive y visuales para el Prado, una Pokédex de presentación y una página de ayuda. El marcado del Prado incluye identificadores físicos `data-wpb-body`; existe una capa `#wpb-layer` vacía reservada para una futura representación.
+**Implementado:** estructura semántica y navegable de la web, estilos responsive y visuales para el Prado, controles de hora y clima del escenario, una Pokédex de presentación y una página de ayuda. El marcado del Prado incluye identificadores físicos `data-wpb-body`; existe una capa `#wpb-layer` vacía reservada para una futura representación.
 
 El selector permite abrir y cerrar su panel, pero las opciones de Pokémon están desactivadas. La Pokédex muestra especies propuestas, no una selección definitiva de juego. El editor es una maqueta con campos desactivados; el atajo que aparece en la interfaz es informativo y no activa una pausa.
 
@@ -106,7 +116,7 @@ La procedencia y licencia deben comprobarse **para cada recurso y autor**: no se
 - [Chuleta del proyecto](docs/CHULETA.md): resumen del estado, páginas y decisiones de la primera versión web.
 - [Informe de investigación](docs/INFORME_INVESTIGACION.md): investigación sobre fuentes de datos, recursos gráficos, licencias, referencias y riesgos. Sus propuestas antiguas deben leerse teniendo en cuenta las decisiones actuales de este README.
 - [Inventario de recursos](assets/ASSETS.md): procedencia y licencia de los recursos incorporados.
-- [Portada web](index.html), [Prado](pages/prado.html), [Pokédex](pages/pokedex.html) y [Ayuda](pages/ayuda.html).
+- [Prado y página principal](index.html), [ruta antigua del Prado](pages/prado.html), [Pokédex](pages/pokedex.html) y [Ayuda](pages/ayuda.html).
 
 <a id="45-combate"></a>
 

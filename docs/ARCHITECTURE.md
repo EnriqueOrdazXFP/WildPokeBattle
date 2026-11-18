@@ -14,7 +14,7 @@
 
 ## Estado real
 
-Actualmente el repositorio tiene páginas HTML, estilos CSS, ciertos atributos `data-wpb-body` y una capa vacía `#wpb-layer`. No hay todavía código JavaScript, motor físico, puente DOM, núcleo, renderer, backend ni runtime de escritorio. Los nombres de componentes y flujos siguientes son arquitectura prevista.
+Actualmente el repositorio tiene páginas HTML, estilos CSS, ciertos atributos `data-wpb-body` y una capa vacía `#wpb-layer`. Un pequeño módulo JavaScript controla únicamente la hora/día-noche y los efectos visuales del clima en el Prado; no implementa reglas de juego ni lee las superficies físicas. No hay motor físico, puente DOM, núcleo, renderer de Pokémon, backend ni runtime de escritorio. Los nombres de componentes y flujos siguientes son arquitectura prevista.
 
 ## Componentes y límites
 

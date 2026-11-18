@@ -3,79 +3,305 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WildPokeBattle: Pokémon que viven en la página</title>
-  <meta name="description" content="Proyecto de fans: Pokémon autónomos que usan los elementos de la web como su mundo físico y combaten en tiempo real.">
+  <title>El Prado · WildPokeBattle</title>
+  <meta name="description" content="El Prado, escenario y cuaderno de campo de WildPokeBattle.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/scenes/prado.css">
 </head>
-<body>
+<body class="scene-prado" data-weather="sun" data-time-of-day="day" data-light-phase="day">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <header class="site-header">
+  <header class="site-header" data-wpb-body="solid">
     <a class="brand" href="index.html">WildPokeBattle</a>
     <nav aria-label="Principal">
       <ul class="site-nav">
-        <li><a href="index.html" aria-current="page">Inicio</a></li>
-        <li><a href="pages/prado.html">Prado</a></li>
         <li><a href="pages/pokedex.html">Pokédex</a></li>
         <li><a href="pages/ayuda.html">Ayuda</a></li>
       </ul>
     </nav>
   </header>
 
-  <main id="contenido" class="page">
-    <section class="hero" aria-labelledby="titulo-portada">
-      <p class="eyebrow">Cuaderno de campo</p>
-      <h1 id="titulo-portada">Los Pokémon no visitan esta página: viven en ella</h1>
-      <p class="lede">Cada título, ficha y panel es terreno real. Elige dos Pokémon, suéltalos en el escenario y observa cómo se mueven y combaten por su cuenta.</p>
-      <p><a class="button button-primary" href="pages/prado.html">Entrar al prado</a></p>
-    </section>
+  <div class="scene-decor" aria-hidden="true">
+    <span class="cloud cloud-a"></span>
+    <span class="cloud cloud-b"></span>
+    <span class="hills"></span>
+    <span class="celestial-body"></span>
+  </div>
 
-    <section aria-labelledby="titulo-pasos">
-      <h2 id="titulo-pasos">Cómo funciona</h2>
-      <ol class="steps">
-        <li>
-          <h3>Elige</h3>
-          <p>Selecciona un Pokémon. Aparece con estadísticas y movimientos aleatorios propios de su especie.</p>
-        </li>
-        <li>
-          <h3>Observa</h3>
-          <p>Cae, aterriza y explora. Salta entre las fichas de la página como si fueran plataformas.</p>
-        </li>
-        <li>
-          <h3>Enfréntalos</h3>
-          <p>Con un segundo Pokémon empieza un combate en tiempo real, sin turnos, hasta que uno se debilita.</p>
-        </li>
-      </ol>
-    </section>
+  <div class="site-layout scene-layout">
+    <main id="contenido" class="arena">
+      <div class="weather-effects" aria-hidden="true"></div>
 
-    <section aria-labelledby="titulo-escenarios">
-      <h2 id="titulo-escenarios">Escenarios</h2>
-      <ul class="card-grid">
-        <li class="note">
-          <h3><a href="pages/prado.html">Prado</a></h3>
-          <p>Hierba abierta y plataformas suaves. El primer escenario disponible.</p>
-        </li>
-        <li class="note note-muted">
-          <h3>Bosque</h3>
-          <p>Próximamente.</p>
-        </li>
-        <li class="note note-muted">
-          <h3>Cueva</h3>
-          <p>Próximamente.</p>
-        </li>
-        <li class="note note-muted">
-          <h3>Volcán</h3>
-          <p>Próximamente.</p>
-        </li>
-      </ul>
-    </section>
-  </main>
+      <section id="escenario" class="arena-intro" aria-labelledby="titulo-prado">
+        <p class="eyebrow">Cuaderno de campo · Escenario 1</p>
+        <h1 id="titulo-prado">El Prado</h1>
+        <p class="lede">Los Pokémon no visitan esta página: viven en ella. Cada título, ficha y panel está pensado como terreno para una futura simulación.</p>
+        <p class="arena-action"><button class="button button-primary" type="button" popovertarget="selector">Seleccionar Pokémon</button></p>
+        <p class="hint">Pausa y editor: <kbd>Alt</kbd> + <kbd>P</kbd></p>
+      </section>
+
+      <article class="note surface surface-clima" data-wpb-body="platform" aria-labelledby="titulo-clima">
+        <h2 id="titulo-clima">
+          <button class="weather-trigger" type="button" popovertarget="weather-options" aria-controls="weather-options">
+            Clima <span aria-hidden="true">⌄</span>
+          </button>
+        </h2>
+        <p id="weather-description" aria-live="polite">Soleado, con brisa suave.</p>
+      </article>
+
+      <article class="note surface surface-hora" data-wpb-body="platform" aria-labelledby="titulo-hora">
+        <h2 id="titulo-hora">Hora</h2>
+        <div class="clock-control">
+          <div class="clock-face" role="group" aria-label="Reloj analógico">
+            <span class="clock-number clock-number-12" aria-hidden="true">12</span>
+            <span class="clock-number clock-number-1" aria-hidden="true">1</span>
+            <span class="clock-number clock-number-2" aria-hidden="true">2</span>
+            <span class="clock-number clock-number-3" aria-hidden="true">3</span>
+            <span class="clock-number clock-number-4" aria-hidden="true">4</span>
+            <span class="clock-number clock-number-5" aria-hidden="true">5</span>
+            <span class="clock-number clock-number-6" aria-hidden="true">6</span>
+            <span class="clock-number clock-number-7" aria-hidden="true">7</span>
+            <span class="clock-number clock-number-8" aria-hidden="true">8</span>
+            <span class="clock-number clock-number-9" aria-hidden="true">9</span>
+            <span class="clock-number clock-number-10" aria-hidden="true">10</span>
+            <span class="clock-number clock-number-11" aria-hidden="true">11</span>
+            <div class="clock-hand clock-hand-hour" role="slider" tabindex="0" aria-label="Manecilla de las horas" aria-valuemin="1" aria-valuemax="12" aria-valuenow="12" aria-valuetext="12:00 PM" data-clock-hand="hour"></div>
+            <span class="clock-center" aria-hidden="true"></span>
+          </div>
+          <div class="clock-period" role="group" aria-label="Parte del día">
+            <button type="button" data-period="AM" aria-pressed="false">AM</button>
+            <button type="button" data-period="PM" aria-pressed="true">PM</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="note note-muted surface surface-obras" data-wpb-body="platform" data-wpb-enabled="false" aria-labelledby="titulo-obras">
+        <h2 id="titulo-obras">Caja desactivada</h2>
+        <p>Se ve, pero no se puede pisar: no tiene caja física.</p>
+      </article>
+
+      <article class="note surface surface-rutas" data-wpb-body="platform" aria-labelledby="titulo-rutas">
+        <h2 id="titulo-rutas">Ruta: Prado</h2>
+        <p>Un sendero cruza el prado de oeste a este y termina en el muro de piedra.</p>
+      </article>
+
+      <article class="note surface surface-sendero" data-wpb-body="platform" aria-labelledby="titulo-sendero">
+        <h2 id="titulo-sendero">Sendero</h2>
+        <p>El primer escalón del prado.</p>
+      </article>
+
+      <article class="note surface surface-flora" data-wpb-body="platform" aria-labelledby="titulo-flora">
+        <h2 id="titulo-flora">Flora</h2>
+        <p>Hierba alta, tréboles y flores que se cierran al anochecer.</p>
+      </article>
+
+      <aside class="note surface-wall" data-wpb-body="wall" aria-labelledby="titulo-muro">
+        <h2 id="titulo-muro">Muro de piedra</h2>
+        <section aria-labelledby="titulo-funciona">
+          <h3 id="titulo-funciona">Así será el combate</h3>
+          <ol class="field-steps">
+            <li><strong>Elige.</strong> La selección ofrecerá Pokémon con estadísticas y movimientos de su especie.</li>
+            <li><strong>Observa.</strong> Se moverán entre las fichas, como si fueran plataformas.</li>
+            <li><strong>Enfréntalos.</strong> Con dos Pokémon, el combate será automático y en tiempo real.</li>
+          </ol>
+        </section>
+      </aside>
+
+      <div class="ground" data-wpb-body="solid"></div>
+    </main>
+    <aside class="scenario-rail">
+      <nav aria-labelledby="titulo-escenarios">
+        <h2 id="titulo-escenarios">Escenarios</h2>
+        <ul class="scenario-list">
+          <li class="scenario-card">
+            <a class="scenario-item" href="index.html" aria-current="page" aria-label="Prado" title="Prado">
+              <span class="scenario-icon" aria-hidden="true">🌿</span>
+              <span class="scenario-name">Prado</span>
+            </a>
+          </li>
+          <li class="scenario-card scenario-card-muted">
+            <span class="scenario-item" aria-label="Bosque, próximamente" title="Bosque, próximamente">
+              <span class="scenario-icon" aria-hidden="true">🌲</span>
+              <span class="scenario-copy"><span class="scenario-name">Bosque</span><span class="scenario-status">Próximamente</span></span>
+            </span>
+          </li>
+          <li class="scenario-card scenario-card-muted">
+            <span class="scenario-item" aria-label="Cueva, próximamente" title="Cueva, próximamente">
+              <span class="scenario-icon" aria-hidden="true">🪨</span>
+              <span class="scenario-copy"><span class="scenario-name">Cueva</span><span class="scenario-status">Próximamente</span></span>
+            </span>
+          </li>
+          <li class="scenario-card scenario-card-muted">
+            <span class="scenario-item" aria-label="Volcán, próximamente" title="Volcán, próximamente">
+              <span class="scenario-icon" aria-hidden="true">🌋</span>
+              <span class="scenario-copy"><span class="scenario-name">Volcán</span><span class="scenario-status">Próximamente</span></span>
+            </span>
+          </li>
+          <li class="scenario-card scenario-card-muted">
+            <span class="scenario-item" aria-label="Desierto, próximamente" title="Desierto, próximamente">
+              <span class="scenario-icon" aria-hidden="true">🏜️</span>
+              <span class="scenario-copy"><span class="scenario-name">Desierto</span><span class="scenario-status">Próximamente</span></span>
+            </span>
+          </li>
+          <li class="scenario-card scenario-card-muted">
+            <span class="scenario-item" aria-label="Montaña, próximamente" title="Montaña, próximamente">
+              <span class="scenario-icon" aria-hidden="true">⛰️</span>
+              <span class="scenario-copy"><span class="scenario-name">Montaña</span><span class="scenario-status">Próximamente</span></span>
+            </span>
+          </li>
+          <li class="scenario-card scenario-card-muted">
+            <span class="scenario-item" aria-label="Montaña helada, próximamente" title="Montaña helada, próximamente">
+              <span class="scenario-icon" aria-hidden="true">🏔️</span>
+              <span class="scenario-copy"><span class="scenario-name">Montaña helada</span><span class="scenario-status">Próximamente</span></span>
+            </span>
+          </li>
+          <li class="scenario-card scenario-card-muted">
+            <span class="scenario-item" aria-label="Bosque helado, próximamente" title="Bosque helado, próximamente">
+              <span class="scenario-icon" aria-hidden="true">🌲❄️</span>
+              <span class="scenario-copy"><span class="scenario-name">Bosque helado</span><span class="scenario-status">Próximamente</span></span>
+            </span>
+          </li>
+          <li class="scenario-card scenario-card-muted">
+            <span class="scenario-item" aria-label="Río, próximamente" title="Río, próximamente">
+              <span class="scenario-icon" aria-hidden="true">🏞️</span>
+              <span class="scenario-copy"><span class="scenario-name">Río</span><span class="scenario-status">Próximamente</span></span>
+            </span>
+          </li>
+          <li class="scenario-card scenario-card-muted">
+            <span class="scenario-item" aria-label="Mar abierto, próximamente" title="Mar abierto, próximamente">
+              <span class="scenario-icon" aria-hidden="true">🌊</span>
+              <span class="scenario-copy"><span class="scenario-name">Mar abierto</span><span class="scenario-status">Próximamente</span></span>
+            </span>
+          </li>
+          <li class="scenario-card scenario-card-muted">
+            <span class="scenario-item" aria-label="Laboratorio, próximamente" title="Laboratorio, próximamente">
+              <span class="scenario-icon" aria-hidden="true">🧪</span>
+              <span class="scenario-copy"><span class="scenario-name">Laboratorio</span><span class="scenario-status">Próximamente</span></span>
+            </span>
+          </li>
+          <li class="scenario-card scenario-card-muted">
+            <span class="scenario-item" aria-label="Espacio, próximamente" title="Espacio, próximamente">
+              <span class="scenario-icon" aria-hidden="true">🌌</span>
+              <span class="scenario-copy"><span class="scenario-name">Espacio</span><span class="scenario-status">Próximamente</span></span>
+            </span>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+  </div>
 
   <footer class="site-footer">
     <p>Proyecto de fans, gratuito y sin ánimo de lucro. No está afiliado a Nintendo, Game Freak, Creatures Inc. ni The Pokémon Company. <a href="pages/ayuda.html#aviso-legal">Aviso legal</a></p>
   </footer>
+
+  <div id="wpb-layer" aria-hidden="true"></div>
+
+  <div id="weather-options" class="weather-options" popover="auto" aria-labelledby="weather-options-title">
+    <h2 id="weather-options-title">Elegir clima</h2>
+    <div class="weather-option-list" role="group" aria-label="Climas disponibles">
+      <button type="button" data-weather-option="sun" aria-pressed="true">Sol</button>
+      <button type="button" data-weather-option="rain" aria-pressed="false">Lluvia</button>
+      <button type="button" data-weather-option="snow" aria-pressed="false">Nieve</button>
+      <button type="button" data-weather-option="blizzard" aria-pressed="false">Ventisca</button>
+      <button type="button" data-weather-option="sandstorm" aria-pressed="false">Tormenta de arena</button>
+    </div>
+  </div>
+
+  <dialog id="selector" class="panel" popover aria-labelledby="titulo-selector">
+    <header class="panel-header">
+      <h2 id="titulo-selector">Seleccionar Pokémon</h2>
+      <button class="button" type="button" popovertarget="selector" popovertargetaction="hide">Cerrar</button>
+    </header>
+    <p class="hint">La selección se activará más adelante. Mientras tanto puedes consultar la <a href="pages/pokedex.html">Pokédex</a>.</p>
+    <ul class="picker">
+      <li><button type="button" disabled>Venusaur</button></li>
+      <li><button type="button" disabled>Charizard</button></li>
+      <li><button type="button" disabled>Blastoise</button></li>
+      <li><button type="button" disabled>Pikachu</button></li>
+      <li><button type="button" disabled>Gengar</button></li>
+      <li><button type="button" disabled>Snorlax</button></li>
+      <li><button type="button" disabled>Dragonite</button></li>
+      <li><button type="button" disabled>Scizor</button></li>
+      <li><button type="button" disabled>Tyranitar</button></li>
+      <li><button type="button" disabled>Gardevoir</button></li>
+      <li><button type="button" disabled>Garchomp</button></li>
+      <li><button type="button" disabled>Lucario</button></li>
+    </ul>
+  </dialog>
+
+  <dialog id="editor" class="panel panel-wide" aria-labelledby="titulo-editor">
+    <header class="panel-header">
+      <h2 id="titulo-editor">Editor de Pokémon</h2>
+      <a class="button" href="#escenario">Cerrar maqueta</a>
+    </header>
+    <p class="hint">Maqueta sin funcionalidad, con Pikachu como ejemplo. El editor real se abrirá con <kbd>Alt</kbd> + <kbd>P</kbd>.</p>
+    <form>
+      <fieldset class="editor-fields" disabled>
+        <legend>Pikachu</legend>
+        <div class="field-row">
+          <label>Nivel <input type="number" name="nivel" min="1" max="100" value="50"></label>
+          <label>Naturaleza
+            <select name="naturaleza">
+              <option>Fuerte</option>
+              <option>Alegre</option>
+              <option>Modesta</option>
+            </select>
+          </label>
+          <label>Habilidad
+            <select name="habilidad">
+              <option>Pararrayos</option>
+              <option>Elec. Estática</option>
+            </select>
+          </label>
+          <label>Semilla <input type="text" name="semilla" value="20261104"></label>
+        </div>
+        <div class="table-scroll">
+          <table class="stats">
+            <caption>Estadísticas</caption>
+            <thead>
+              <tr><th scope="col">Estadística</th><th scope="col">IV</th><th scope="col">EV</th><th scope="col">Final</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">PS</th><td><input type="number" name="iv-ps" aria-label="IV de PS" min="0" max="31" value="31"></td><td><input type="number" name="ev-ps" aria-label="EV de PS" min="0" max="252" value="0"></td><td><output>110</output></td></tr>
+              <tr><th scope="row">Ataque</th><td><input type="number" name="iv-atk" aria-label="IV de Ataque" min="0" max="31" value="31"></td><td><input type="number" name="ev-atk" aria-label="EV de Ataque" min="0" max="252" value="0"></td><td><output>75</output></td></tr>
+              <tr><th scope="row">Defensa</th><td><input type="number" name="iv-def" aria-label="IV de Defensa" min="0" max="31" value="31"></td><td><input type="number" name="ev-def" aria-label="EV de Defensa" min="0" max="252" value="0"></td><td><output>60</output></td></tr>
+              <tr><th scope="row">Ataque Esp.</th><td><input type="number" name="iv-spa" aria-label="IV de Ataque Especial" min="0" max="31" value="31"></td><td><input type="number" name="ev-spa" aria-label="EV de Ataque Especial" min="0" max="252" value="0"></td><td><output>70</output></td></tr>
+              <tr><th scope="row">Defensa Esp.</th><td><input type="number" name="iv-spd" aria-label="IV de Defensa Especial" min="0" max="31" value="31"></td><td><input type="number" name="ev-spd" aria-label="EV de Defensa Especial" min="0" max="252" value="0"></td><td><output>70</output></td></tr>
+              <tr><th scope="row">Velocidad</th><td><input type="number" name="iv-spe" aria-label="IV de Velocidad" min="0" max="31" value="31"></td><td><input type="number" name="ev-spe" aria-label="EV de Velocidad" min="0" max="252" value="0"></td><td><output>110</output></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="field-row">
+          <label>Movimiento 1
+            <select name="movimiento-1"><option>Placaje Eléc.</option></select>
+          </label>
+          <label>Movimiento 2
+            <select name="movimiento-2"><option>Surf</option></select>
+          </label>
+          <label>Movimiento 3
+            <select name="movimiento-3"><option>Carantoña</option></select>
+          </label>
+          <label>Movimiento 4
+            <select name="movimiento-4"><option>Desarme</option></select>
+          </label>
+        </div>
+        <label class="field-block">Set en formato Showdown
+          <textarea name="set" rows="3">Pikachu
+Ability: Lightning Rod
+Level: 50</textarea>
+        </label>
+        <div class="button-row">
+          <button class="button" type="button">Regenerar</button>
+          <button class="button" type="button">Importar</button>
+          <button class="button" type="button">Exportar</button>
+          <button class="button" type="button">Retirar</button>
+        </div>
+      </fieldset>
+    </form>
+  </dialog>
+  <script type="module" src="js/scene-controls.js"></script>
 </body>
 </html>
